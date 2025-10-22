@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+	<JobDef>
+		<defName>PickupCover</defName>
+		<driverClass>Deployables.PickupCoverJob</driverClass>
+		<reportString>picking up cover.</reportString>
+		<casualInterruptible>true</casualInterruptible>
+		<alwaysShowWeapon>true</alwaysShowWeapon>
+		<checkOverrideOnDamage>Never</checkOverrideOnDamage>
+		<playerInterruptible>true</playerInterruptible>
+		<suspendable>true</suspendable>
+	</JobDef>
+
+</Defs>

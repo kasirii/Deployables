@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>	
+
+<ThingDef ParentName="SK_ApparelNoQualityBase" MayRequire="ViTech.MedievalOverhaul">
+  <defName>PaviseTowable</defName>
+  <label>Pavise with straps</label>
+  <description>Pavise with straps, that can be used as deployable cover.</description>
+	
+  <graphicData>
+			<texPath>Things/Apparel/Pavise/Pavise</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+  </graphicData>
+
+	<statBases>
+		<Mass>2.5</Mass>
+		<Bulk>15</Bulk>
+		<MarketValue>80</MarketValue>
+	</statBases>
+
+	<smeltable>false</smeltable>
+	<destroyOnDrop>false</destroyOnDrop>
+	
+  <comps>
+	  <li Class="Deployables.CompProps_CompUseWhenCast" />
+	  <li Class="Deployables.CompProps_CompSpawnCover">
+      <coverThingDef>Pavise</coverThingDef>
+      <spawnOffset>1</spawnOffset>
+	    <destroyParentOnUse>true</destroyParentOnUse>
+		<ownerTag>true</ownerTag>
+    </li>
+  </comps>
+	
+  <apparel>
+    <wornGraphicPath>Things/Apparel/Pavise/Pavise</wornGraphicPath>
+    <wornGraphicData>
+        <renderUtilityAsPack>true</renderUtilityAsPack>
+        <north>
+            <offset>(0,-0.05)</offset>
+        </north>
+        <east>
+            <offset>(-0.25,-0.05)</offset>
+            <thin>
+                <offset>(0.0,0)</offset>
+            </thin>
+            <hulk>
+                <offset>(-0.1,0)</offset>
+            </hulk>
+            <fat>
+                <offset>(-0.15,0)</offset>
+            </fat>
+        </east>
+        <west>
+            <offset>(0.25,-0.05)</offset>
+            <thin>
+                <offset>(-0.0,0)</offset>
+            </thin>
+            <hulk>
+                <offset>(0.1,0)</offset>
+            </hulk>
+            <fat>
+                <offset>(0.15,0)</offset>
+            </fat>
+        </west>
+        <male>
+            <scale>(0.75,0.75)</scale>
+        </male>
+        <female>
+            <scale>(0.75,0.75)</scale>
+        </female>
+        <thin>
+            <scale>(0.75,0.75)</scale>
+        </thin>
+        <hulk>
+            <scale>(0.9,0.9)</scale>
+        </hulk>
+        <fat>
+            <scale>(0.9,0.9)</scale>
+        </fat>
+    </wornGraphicData>
+	  
+    <countsAsClothingForNudity>false</countsAsClothingForNudity>
+    <careIfWornByCorpse>false</careIfWornByCorpse>
+    <careIfDamaged>false</careIfDamaged>
+    <wearPerDay>0</wearPerDay>
+    <bodyPartGroups>
+        <li>Waist</li>
+    </bodyPartGroups>
+    <layers>
+        <li>Belt</li>
+    </layers>
+  </apparel>
+    <thingCategories>
+        <li>ApparelUtility</li>
+    </thingCategories>
+    <tradeTags>
+        <li>Clothing</li>
+        <li>Armor</li>
+    </tradeTags>
+</ThingDef>
+
+</Defs>

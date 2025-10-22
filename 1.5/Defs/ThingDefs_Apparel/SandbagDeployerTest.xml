@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>	
+
+<ThingDef ParentName="ApparelNoQualityBase">
+  <defName>SandbagsTowable</defName>
+  <label>Sandbags with straps</label>
+  <description>Sandbags with straps, that can be used as deployable cover.</description>
+	
+  <graphicData>
+			<texPath>Things/Apparel/BeltWithSandbags/Belt</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+  </graphicData>
+
+	<stuffCategories>
+		<li>Fabric</li>
+	</stuffCategories>
+
+	<statBases>
+		<Mass>2.0</Mass>
+		<MarketValue>80</MarketValue>
+	</statBases>
+
+	<smeltable>false</smeltable>
+	<destroyOnDrop>false</destroyOnDrop>
+	
+  <comps>
+	  <li Class="Deployables.CompProps_CompUseWhenCast" />
+	  <li Class="Deployables.CompProps_CompSpawnCover">
+      <coverThingDef>Sandbags</coverThingDef>
+      <spawnOffset>1</spawnOffset>
+		<destroyParentOnUse>true</destroyParentOnUse>
+		<ownerTag>true</ownerTag>
+    </li>
+  </comps>
+	
+  <apparel>
+    <wornGraphicPath>Things/Apparel/BeltWithSandbags/Belt</wornGraphicPath>
+	  
+    <countsAsClothingForNudity>false</countsAsClothingForNudity>
+    <careIfWornByCorpse>false</careIfWornByCorpse>
+    <careIfDamaged>false</careIfDamaged>
+    <wearPerDay>0</wearPerDay>
+    <bodyPartGroups>
+        <li>Waist</li>
+    </bodyPartGroups>
+    <layers>
+        <li>Shell</li>
+    </layers>
+  </apparel>
+    <thingCategories>
+        <li>ApparelUtility</li>
+    </thingCategories>
+    <tradeTags>
+        <li>Clothing</li>
+        <li>Armor</li>
+    </tradeTags>
+</ThingDef>
+
+</Defs>

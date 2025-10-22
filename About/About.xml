@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ModMetaData>
+  <name>Deployables</name>
+  <author>Kasiri</author>
+  <modIconPath IgnoreIfNoMatchingField="True">UI/DLogo</modIconPath>
+  <description>Test 1</description>
+  <packageId>Kasiri.Deployables.HSK</packageId>
+  <supportedVersions>
+	<li>1.5</li>
+  </supportedVersions>
+	<modDependencies>
+		<li>
+			<packageId>brrainz.harmony</packageId>
+			<displayName>Harmony</displayName>
+			<downloadUrl>https://github.com/pardeike/HarmonyRimWorld/releases/latest</downloadUrl>
+			<steamWorkshopUrl>https://steamcommunity.com/workshop/filedetails/?id=2009463077</steamWorkshopUrl>
+		</li>
+	</modDependencies>
+  <loadAfter>
+	  <li>brrainz.harmony</li>
+    <li>Ludeon.RimWorld</li>
+  </loadAfter>
+  <incompatibleWith>
+  </incompatibleWith>
+</ModMetaData>
