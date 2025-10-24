@@ -3,6 +3,7 @@ using Verse;
 using Verse.AI;
 using System.Collections.Generic;
 
+
 namespace Deployables
 {
     public class DeployablesOwnerComp : MapComponent
@@ -17,11 +18,6 @@ namespace Deployables
             OwnerMap[thing] = (pawn, parent);
 		}
 
-        public static (Pawn, Thing) GetOwnerWithParent(Thing cover)
-        {
-            return cover != null && OwnerMap.TryGetValue(cover, out var v) ? v : (null, null);
-        }
-
 		private static readonly List<Thing> _toRemoveBuffer = new List<Thing>();
         private static readonly List<Thing> _toPickupBuffer = new List<Thing>();
         private int tickCounter;
@@ -34,21 +30,31 @@ namespace Deployables
 				{
                     var thing = kvp.Key;
 					var pawn = kvp.Value.Item1;
-                    if (thing.DestroyedOrNull() || pawn.DestroyedOrNull() || pawn.Downed || pawn.InMentalState)
+                    if (thing.DestroyedOrNull() || pawn.DestroyedOrNull() 
+                        || pawn.Downed || pawn.InMentalState
+                        || (pawn.Position - thing.Position).LengthHorizontal > 10f)
                     {
                         _toRemoveBuffer.Add(thing);
                         continue;
                     }    
 						
-                    if (pawn.CurJob != null && pawn.CurJob.targetA.IsValid)
+                    if (pawn.CurJobDef == JobDefOf.Goto)
                     {
-                        IntVec3 targetPos = pawn.CurJob.targetA.Cell;
-                        if ((targetPos - thing.Position).LengthHorizontal > 1.5f)
+                        //Log.Message($"pawn CurJob is {pawn.CurJob.ToString()}");
+                        if ((pawn.CurJob.targetA.Cell - thing.Position).LengthHorizontal > 1.5f)
                         {
                             _toPickupBuffer.Add(thing);
                         }
                     }
+
+                    if (thing.HasComp<CompMannable>()
+                        && pawn.CurJob.def != CombatExtended.CE_JobDefOf.ReloadTurret)
+                    {
+                       //Log.Message("ManUtils start");
+                        ManUtils.ManTow(pawn, thing);
+                    }
                 }
+
                 if (_toPickupBuffer.Count > 0)
                 {
                     foreach (var thing in _toPickupBuffer)
@@ -64,6 +70,7 @@ namespace Deployables
                         }
                     }    
                 }
+
                 if (_toRemoveBuffer.Count > 0)
 				{
 					foreach (var thing in _toRemoveBuffer)
@@ -72,6 +79,6 @@ namespace Deployables
                 _toRemoveBuffer.Clear();
                 _toPickupBuffer.Clear();
             }
-		}
+        }
 	}
 }

@@ -40,14 +40,23 @@
 		<Compile Include="MapComps/DeployablesOwnerComp.cs" />
 		<Compile Include="MapComps/DelayedDestroy.cs" />
 		<Compile Include="Utils/PickupCoverUtils.cs" />
+		<Compile Include="Utils/ManUtils.cs" />
+		<Compile Include="Utils/VerbUtils.cs" />
 		<Compile Include="JobDrivers/PickupCoverJob.cs" />
 		<Compile Include="Harmony/HarmonyInit.cs" />
+		<Compile Include="Harmony/Patch_Verb_TryStartCastOn.cs" />
+		<Compile Include="Harmony/Patch_Pawn_Tick.cs" />
+		
+
 
 	</ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Krafs.Rimworld.Ref" Version="1.5.4409" />
     <PackageReference Include="Lib.Harmony" Version="2.4.1" />
+	<Reference Include="CombatExtended">
+		<HintPath>..\..\CECompat\CombatExtended.dll</HintPath>
+	</Reference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

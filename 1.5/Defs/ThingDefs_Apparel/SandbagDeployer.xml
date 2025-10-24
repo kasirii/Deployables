@@ -2,7 +2,7 @@
 <Defs>	
 
 <ThingDef ParentName="SK_ApparelNoQualityBase" MayRequire="skyarkhangel.HSK">
-  <defName>SandbagsTowable</defName>
+  <defName>Deployable_SandbagsTowable</defName>
   <label>Sandbags with straps</label>
   <description>Sandbags with straps, that can be used as deployable cover.</description>
 	

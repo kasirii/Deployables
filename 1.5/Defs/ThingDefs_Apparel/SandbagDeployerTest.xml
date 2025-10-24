@@ -2,8 +2,8 @@
 <Defs>	
 
 <ThingDef ParentName="ApparelNoQualityBase">
-  <defName>SandbagsTowable</defName>
-  <label>Sandbags with straps</label>
+  <defName>Deployable_SandbagsTowable_vanila</defName>
+  <label>Sandbags with straps (vanila)</label>
   <description>Sandbags with straps, that can be used as deployable cover.</description>
 	
   <graphicData>

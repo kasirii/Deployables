@@ -10,6 +10,7 @@ namespace Deployables
         static HarmonyInit()
         {
             var harmony = new Harmony("Deployables.HarmonyPatches");
+
             var original = AccessTools.Method(
                 typeof(Verb),
                 "TryStartCastOn",
@@ -23,12 +24,13 @@ namespace Deployables
                     typeof(bool)
                 }
             );
-
             if (original != null)
             {
                 var postfix = AccessTools.Method(typeof(Patch_Verb_TryStartCastOn), nameof(Patch_Verb_TryStartCastOn.Postfix));
                 harmony.Patch(original, postfix: new HarmonyMethod(postfix));
             }
+
+            harmony.PatchAll();
         }
     }
 }

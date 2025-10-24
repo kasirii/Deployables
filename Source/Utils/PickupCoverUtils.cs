@@ -24,9 +24,9 @@ namespace Deployables
 
 			if (!cover.DestroyedOrNull())
 			{
-				cover.DeSpawn();
-			}
-			DeployablesOwnerComp.OwnerMap.Remove(cover);
+                DelayedDestroy.Schedule(cover);
+                //cover.DeSpawn();
+            }
 			return true;
 		}
 	}

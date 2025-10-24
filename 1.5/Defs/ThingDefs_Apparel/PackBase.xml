@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>	
+
+<ThingDef Name="Deployable_Pack" ParentName="SK_ApparelNoQualityBase" MayRequire="skyarkhangel.HSK">
+	<defName>Deployable_Pack</defName>
+	<label>Deployable pack</label>
+	<statBases>
+		<Mass>2.0</Mass>
+		<MarketValue>80</MarketValue>
+	</statBases>
+
+	<smeltable>false</smeltable>
+	<destroyOnDrop>false</destroyOnDrop>
+	<graphicData>
+		<texPath>Things/Apparel/OneTimeCoverDevice</texPath>
+		<graphicClass>Graphic_Single</graphicClass>
+	</graphicData>
+  <comps>
+	  <li Class="Deployables.CompProps_CompUseWhenCast" />
+  </comps>
+
+	<equippedStatOffsets>
+		<MoveSpeed>-1</MoveSpeed>
+		<WorkSpeedGlobal>-0.5</WorkSpeedGlobal>
+		<CarryWeight>20</CarryWeight>
+
+	</equippedStatOffsets>
+  <apparel>
+	  <wornGraphicData>
+		  <renderUtilityAsPack>true</renderUtilityAsPack>
+		  <north>
+			  <offset>(0,-0.5)</offset>
+		  </north>
+		  <south>
+			  <offset>(0,0.5)</offset>
+		  </south>
+		  <east>
+			  <offset>(-0.5,0.0)</offset>
+			  <thin>
+				  <offset>(-0.5,0.0)</offset>
+			  </thin>
+			  <hulk>
+				  <offset>(-0.5,0.0)</offset>
+			  </hulk>
+			  <fat>
+				  <offset>(-0.5,0.0)</offset>
+			  </fat>
+		  </east>
+		  <west>
+			  <offset>(0.5,0.0)</offset>
+			  <thin>
+				  <offset>(0.5,0.0)</offset>
+			  </thin>
+			  <hulk>
+				  <offset>(0.5,0.0)</offset>
+			  </hulk>
+			  <fat>
+				  <offset>(0.5,0.0)</offset>
+			  </fat>
+		  </west>
+	  </wornGraphicData>
+	  
+    <countsAsClothingForNudity>false</countsAsClothingForNudity>
+    <careIfWornByCorpse>false</careIfWornByCorpse>
+    <careIfDamaged>false</careIfDamaged>
+    <wearPerDay>0</wearPerDay>
+    <bodyPartGroups>
+        <li>Waist</li>
+    </bodyPartGroups>
+    <layers>
+        <li>Belt</li>
+    </layers>
+	  <canBeDesiredForIdeo>false</canBeDesiredForIdeo>
+  </apparel>
+    <thingCategories>
+        <li>ApparelUtility</li>
+    </thingCategories>
+    <tradeTags>
+        <li>Clothing</li>
+        <li>Armor</li>
+    </tradeTags>
+</ThingDef>
+
+</Defs>

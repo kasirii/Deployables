@@ -10,6 +10,7 @@ namespace Deployables
         public int spawnOffset = 1;
         public bool destroyParentOnUse = true;
         public bool ownerTag = true;
+        public bool doFlip = true;
 
         public CompProps_CompSpawnCover()
         {
@@ -25,8 +26,7 @@ namespace Deployables
         {
             if (pawn == null || Props.coverThingDef == null) return;
             var map = pawn.Map; if (map == null) return;
-
-            var stanceBusy = pawn.stances?.curStance as Stance_Busy;
+            var stanceBusy = pawn.stances?.curStance as Stance_Busy; if (stanceBusy == null) return;
             Verb verb = stanceBusy.verb;
             LocalTargetInfo verbTarget = verb.CurrentTarget;
 
@@ -38,14 +38,17 @@ namespace Deployables
                 || cell == pawn.Position
                 || (requiredAffordance != null && !cell.GetTerrain(map).affordances.Contains(requiredAffordance)))
             {
+                VerbUtils.UpdatePawnVerbRanges(pawn, false);
                 return;
             }
 
             var thing = ThingMaker.MakeThing(Props.coverThingDef, parent.Stuff);
             Rot4 rotation = Rot4.FromAngleFlat(dirVec.ToVector3().AngleFlat());
-            rotation = new Rot4((rotation.AsInt + 2) % 4);
+            if (Props.doFlip)
+                rotation = new Rot4((rotation.AsInt + 2) % 4);
 
             var cover = GenSpawn.Spawn(thing, cell, map, rotation);
+            
             cover.HitPoints = (int)(cover.MaxHitPoints * (float)parent.HitPoints / parent.MaxHitPoints);
 
             if (Props.ownerTag)
@@ -53,6 +56,20 @@ namespace Deployables
 
             if (Props.destroyParentOnUse)
                 DelayedDestroy.Schedule(parent);
+
         }
+
+        public override void Notify_Equipped(Pawn pawn)
+        {
+            base.Notify_Equipped(pawn);
+            VerbUtils.UpdatePawnVerbRanges(pawn, true);
+        }
+        public override void Notify_Unequipped(Pawn pawn)
+        {
+            base.Notify_Unequipped(pawn);
+            VerbUtils.UpdatePawnVerbRanges(pawn, true);
+        }
+
     }
+
 }

@@ -16,6 +16,7 @@ namespace Deployables
         protected override IEnumerable<Toil> MakeNewToils()
         {
             this.FailOnDestroyedOrNull(TargetIndex.A);
+            this.FailOnDespawnedNullOrForbidden(TargetIndex.A);
             this.FailOn(() => pawn == null || pawn.Dead || pawn.Downed);
 
             yield return Toils_Goto.GotoThing(TargetIndex.A, PathEndMode.Touch);
@@ -24,8 +25,8 @@ namespace Deployables
             toil.WithProgressBarToilDelay(TargetIndex.A);
             toil.AddFinishAction(() =>
             {
-                if (pawn != null && Cover != null)
-                    PickupCoverUtils.PickupCover(pawn);
+            if (pawn != null && !pawn.Dead && !pawn.Downed && Cover != null && !Cover.DestroyedOrNull())
+                PickupCoverUtils.PickupCover(pawn);
             });
             yield return toil;
         }

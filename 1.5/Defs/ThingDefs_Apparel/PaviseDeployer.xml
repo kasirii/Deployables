@@ -2,7 +2,7 @@
 <Defs>	
 
 <ThingDef ParentName="SK_ApparelNoQualityBase" MayRequire="ViTech.MedievalOverhaul">
-  <defName>PaviseTowable</defName>
+  <defName>Deployable_PaviseTowable</defName>
   <label>Pavise with straps</label>
   <description>Pavise with straps, that can be used as deployable cover.</description>
 	

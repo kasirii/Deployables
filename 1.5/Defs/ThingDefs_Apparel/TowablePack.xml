@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>	
+
+<ThingDef ParentName="Deployable_Pack" MayRequire="skyarkhangel.HSK">
+  <defName>Deployable_BallistaPack</defName>
+  <label>ballista pack</label>
+  <description>Foldable medieval ballista that can be deployed and manned in combat.</description>
+	<graphicData>
+		<texPath>Things/Apparel/OneTimeCoverDevice</texPath>
+		<graphicClass>Graphic_Single</graphicClass>
+	</graphicData>
+	<stuffCategories>
+		<li>Woody</li>
+	</stuffCategories>
+  <comps>
+	  <li Class="Deployables.CompProps_CompSpawnCover">
+      <coverThingDef>MedievalTimes_Ballista</coverThingDef>
+      <spawnOffset>1</spawnOffset>
+		<destroyParentOnUse>true</destroyParentOnUse>
+		<ownerTag>true</ownerTag>
+		<doFlip>false</doFlip>
+    </li>
+  </comps>
+  <apparel>
+	  <wornGraphicData>
+		  <male>
+			  <scale>(1.25,1.25)</scale>
+		  </male>
+		  <female>
+			  <scale>(1.25,1.25)</scale>
+		  </female>
+		  <thin>
+			  <scale>(1.25,1.25)</scale>
+		  </thin>
+		  <hulk>
+			  <scale>(1.25,1.25)</scale>
+		  </hulk>
+		  <fat>
+			  <scale>(1.25,1.25)</scale>
+		  </fat>
+	  </wornGraphicData>
+    <wornGraphicPath>Things/Apparel/Towable/Medieval_Ballista</wornGraphicPath>
+  </apparel>
+</ThingDef>
+
+	<ThingDef ParentName="Deployable_Pack" MayRequire="skyarkhangel.HSK">
+		<defName>Deployable_CannonPack</defName>
+		<label>Cannon pack</label>
+		<description>Foldable medieval Cannon that can be deployed and manned in combat.</description>
+		<graphicData>
+			<texPath>Things/Apparel/OneTimeCoverDevice</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+		</graphicData>
+		<stuffCategories>
+			<li>Woody</li>
+			<li>RuggedMetallic</li>
+		</stuffCategories>
+		<comps>
+			<li Class="Deployables.CompProps_CompSpawnCover">
+				<coverThingDef>Turret_3inOrdinanceRifle</coverThingDef>
+				<spawnOffset>1</spawnOffset>
+				<destroyParentOnUse>true</destroyParentOnUse>
+				<ownerTag>true</ownerTag>
+				<doFlip>false</doFlip>
+			</li>
+		</comps>
+		<apparel>
+			<wornGraphicData>
+				<male>
+					<scale>(2.5,2.5)</scale>
+				</male>
+				<female>
+					<scale>(2.5,2.5)</scale>
+				</female>
+				<thin>
+					<scale>(2.5,2.5)</scale>
+				</thin>
+				<hulk>
+					<scale>(2.5,2.5)</scale>
+				</hulk>
+				<fat>
+					<scale>(2.5,2.5)</scale>
+				</fat>
+			</wornGraphicData>
+			<wornGraphicPath>Things/Apparel/Towable/3inOrdinanceRifle_Top</wornGraphicPath>
+		</apparel>
+	</ThingDef>
+
+	<ThingDef ParentName="Deployable_Pack" MayRequire="skyarkhangel.HSK">
+		<defName>Deployable_GatlingPack</defName>
+		<label>Gatling pack</label>
+		<description>Foldable medieval Gatling that can be deployed and manned in combat.</description>
+		<graphicData>
+			<texPath>Things/Apparel/OneTimeCoverDevice</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+		</graphicData>
+		<stuffCategories>
+			<li>Woody</li>
+			<li>StrongMetallic</li>
+		</stuffCategories>
+		<comps>
+			<li Class="Deployables.CompProps_CompSpawnCover">
+				<coverThingDef>Turret_Gatling</coverThingDef>
+				<spawnOffset>1</spawnOffset>
+				<destroyParentOnUse>true</destroyParentOnUse>
+				<ownerTag>true</ownerTag>
+				<doFlip>false</doFlip>
+			</li>
+		</comps>
+		<apparel>
+			<wornGraphicData>
+				<male>
+					<scale>(2.5,2.5)</scale>
+				</male>
+				<female>
+					<scale>(2.5,2.5)</scale>
+				</female>
+				<thin>
+					<scale>(2.5,2.5)</scale>
+				</thin>
+				<hulk>
+					<scale>(2.5,2.5)</scale>
+				</hulk>
+				<fat>
+					<scale>(2.5,2.5)</scale>
+				</fat>
+			</wornGraphicData>
+			<wornGraphicPath>Things/Apparel/Towable/Gatling_Top</wornGraphicPath>
+		</apparel>
+	</ThingDef>
+
+	<ThingDef ParentName="Deployable_Pack" MayRequire="skyarkhangel.HSK">
+		<defName>Deployable_TOWLauncher</defName>
+		<label>TOWLauncher pack</label>
+		<description>Foldable industrial TOWLauncher that can be deployed and manned in combat.</description>
+		<graphicData>
+			<texPath>Things/Apparel/OneTimeCoverDevice</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+		</graphicData>
+		<stuffCategories>
+			<li>RuggedMetallic</li>
+		</stuffCategories>
+		<comps>
+			<li Class="Deployables.CompProps_CompSpawnCover">
+				<coverThingDef>Turret_TOWLauncher</coverThingDef>
+				<spawnOffset>1</spawnOffset>
+				<destroyParentOnUse>true</destroyParentOnUse>
+				<ownerTag>true</ownerTag>
+				<doFlip>false</doFlip>
+			</li>
+		</comps>
+		<apparel>
+			<wornGraphicData>
+				<male>
+					<scale>(1.25,1.25)</scale>
+				</male>
+				<female>
+					<scale>(1.25,1.25)</scale>
+				</female>
+				<thin>
+					<scale>(1.25,1.25)</scale>
+				</thin>
+				<hulk>
+					<scale>(1.25,1.25)</scale>
+				</hulk>
+				<fat>
+					<scale>(1.25,1.25)</scale>
+				</fat>
+			</wornGraphicData>
+			<wornGraphicPath>Things/Apparel/Towable/TOWLauncher_Top</wornGraphicPath>
+		</apparel>
+	</ThingDef>
+
+	<ThingDef ParentName="Deployable_Pack" MayRequire="skyarkhangel.HSK">
+		<defName>Deployable_Javelin</defName>
+		<label>Javelin pack</label>
+		<description>Foldable medieval Javelin that can be deployed and manned in combat.</description>
+		<graphicData>
+			<texPath>Things/Apparel/OneTimeCoverDevice</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+		</graphicData>
+		<stuffCategories>
+			<li>RuggedMetallic</li>
+		</stuffCategories>
+		<comps>
+			<li Class="Deployables.CompProps_CompSpawnCover">
+				<coverThingDef>LightMissileSystem</coverThingDef>
+				<spawnOffset>1</spawnOffset>
+				<destroyParentOnUse>true</destroyParentOnUse>
+				<ownerTag>true</ownerTag>
+				<doFlip>false</doFlip>
+			</li>
+		</comps>
+		<apparel>
+			<wornGraphicData>
+				<male>
+					<scale>(1.25,1.25)</scale>
+				</male>
+				<female>
+					<scale>(1.25,1.25)</scale>
+				</female>
+				<thin>
+					<scale>(1.25,1.25)</scale>
+				</thin>
+				<hulk>
+					<scale>(1.25,1.25)</scale>
+				</hulk>
+				<fat>
+					<scale>(1.25,1.25)</scale>
+				</fat>
+			</wornGraphicData>
+			<wornGraphicPath>Things/Apparel/Towable/FGM_Javelin_Top</wornGraphicPath>
+		</apparel>
+	</ThingDef>
+
+</Defs>
