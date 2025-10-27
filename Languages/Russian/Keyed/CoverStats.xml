@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+	<Deployables.Ammo>Снаряд</Deployables.Ammo>
+	<Deployables.RemainingAmmo>Снарядов осталось</Deployables.RemainingAmmo>
+	<Deployables.AmmoType>Снаряды</Deployables.AmmoType>
+	<Deployables.AmmoTypeDescriprion>Используемый тип снарядов.</Deployables.AmmoTypeDescriprion>
+	<Deployables.RemainingAmmoDescriprion>Сколько снарядов осталось в укладке.</Deployables.RemainingAmmoDescriprion>
+
+
+</LanguageData>

@@ -46,7 +46,9 @@
 		<Compile Include="Harmony/HarmonyInit.cs" />
 		<Compile Include="Harmony/Patch_Verb_TryStartCastOn.cs" />
 		<Compile Include="Harmony/Patch_Pawn_Tick.cs" />
+		<Compile Include="Harmony/Patch_PawnDowned.cs" />
 		
+
 
 
 	</ItemGroup>

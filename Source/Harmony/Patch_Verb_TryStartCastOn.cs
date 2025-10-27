@@ -16,24 +16,26 @@ namespace Deployables
             bool preventFriendlyFire,
             bool nonInterruptingSelfCast)
         {
-            //Log.Message("[Deployables] TryStartCastOn patch triggered");
-
-            if (!(__instance is Verb_Shoot || __instance is CombatExtended.Verb_ShootCE)) return;
-
-            if (!__instance.CasterIsPawn) return;
-
-            var pawn = __instance.CasterPawn;
-            if (pawn == null || pawn.apparel == null) return;
-
-            var weapon = pawn.equipment?.Primary;
-            if (weapon?.def == null) return;
-
-            foreach (var comp in pawn.apparel.WornApparel
-                         .SelectMany(a => a.AllComps)
-                         .OfType<CompUseWhenCast>())
+            try
             {
-                comp.OnUse(pawn, __instance, castTarg);
+                if (!(__instance is Verb_Shoot || __instance is CombatExtended.Verb_ShootCE)) return;
+
+                if (!__instance.CasterIsPawn) return;
+
+                var pawn = __instance.CasterPawn;
+                if (pawn == null || pawn.apparel == null) return;
+
+                var weapon = pawn.equipment?.Primary;
+                if (weapon?.def == null) return;
+
+                foreach (var comp in pawn.apparel.WornApparel
+                             .SelectMany(a => a.AllComps)
+                             .OfType<CompUseWhenCast>())
+                {
+                    comp.OnUse(pawn);
+                }
             }
+            catch (System.Exception) {}
         }
     }
 }

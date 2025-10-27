@@ -7,27 +7,39 @@ namespace Deployables
 {
 	public static class PickupCoverUtils
 	{
-		public static bool PickupCover(Pawn pawn)
+		public static void PickupCover(Pawn pawn)
 		{
-			if (pawn == null || pawn.Map == null) return false;
+			if (pawn == null || pawn.Map == null) return;
 
 			var kvp = DeployablesOwnerComp.OwnerMap
 				.FirstOrDefault(kv => kv.Value.Item1 == pawn);
 
-			if (kvp.Equals(default(KeyValuePair<Thing, (Pawn, Thing)>))) return false;
+			if (kvp.Equals(default(KeyValuePair<Thing, (Pawn, Thing)>))) return;
 
 			var cover = kvp.Key;
 			var parent = kvp.Value.Item2 as Apparel;
-			var newApparel = ThingMaker.MakeThing(parent.def, cover.Stuff) as Apparel;
-			newApparel.HitPoints = (int)(newApparel.MaxHitPoints * (float)cover.HitPoints / cover.MaxHitPoints);
-			pawn.apparel.Wear(newApparel, dropReplacedApparel: true);
+            
+
+            if (parent.DestroyedOrNull())
+			{
+                var coverComp = pawn.apparel?.WornApparel?
+                .SelectMany(a => a.AllComps)
+                .OfType<CompSpawnCover>()
+                .FirstOrDefault();
+				if (!coverComp.Props.destroyParentOnUse) return;
+                var newApparel = ThingMaker.MakeThing(parent.def, cover.Stuff) as Apparel;
+                newApparel.HitPoints = (int)(newApparel.MaxHitPoints * (float)cover.HitPoints / cover.MaxHitPoints);
+                pawn.apparel.Wear(newApparel, dropReplacedApparel: true);
+            }
+			
 
 			if (!cover.DestroyedOrNull())
 			{
-                DelayedDestroy.Schedule(cover);
+                //DelayedDestroy.Destroy(cover);
+                cover.Destroy(DestroyMode.Vanish);
                 //cover.DeSpawn();
             }
-			return true;
+			return;
 		}
 	}
 }

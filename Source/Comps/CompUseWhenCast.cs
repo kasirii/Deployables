@@ -22,7 +22,7 @@ namespace Deployables
     {
         public CompProps_CompUseWhenCast Props => (CompProps_CompUseWhenCast)props;
 
-        public void OnUse(Pawn pawn, Verb verb, LocalTargetInfo target)
+        public void OnUse(Pawn pawn)
         {
             //Log.Message("OnUse start");
             foreach (var effect in parent.AllComps.OfType<IUseWhenCastEffect>())

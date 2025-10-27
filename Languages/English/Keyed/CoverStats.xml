@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+	<Deployables.Ammo>Ammo </Deployables.Ammo>
+	<Deployables.RemainingAmmo>Remaining ammo </Deployables.RemainingAmmo>
+	<Deployables.AmmoType>Ammo Type</Deployables.AmmoType>
+	<Deployables.AmmoTypeDescriprion>Type of used ammunition.</Deployables.AmmoTypeDescriprion>
+	<Deployables.RemainingAmmoDescriprion>Number of ammunition remaining inside the pack.</Deployables.RemainingAmmoDescriprion>
+</LanguageData>

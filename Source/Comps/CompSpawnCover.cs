@@ -1,6 +1,11 @@
 ﻿using RimWorld;
 using Verse;
 using Verse.AI;
+using System.Collections.Generic;
+using UnityEngine;
+using CombatExtended;
+
+
 
 namespace Deployables
 {
@@ -12,6 +17,14 @@ namespace Deployables
         public bool ownerTag = true;
         public bool doFlip = true;
 
+        public ThingDef ammoDef = null;
+        public IntRange ammoCountRange = new IntRange(3, 5);
+        public bool randomizeAmmo = false;
+        public bool infiniteAmmo = false;
+
+        public string turretTexPath;
+        public float drawSize = 1f;
+
         public CompProps_CompSpawnCover()
         {
             this.compClass = typeof(CompSpawnCover);
@@ -22,9 +35,102 @@ namespace Deployables
     {
         public CompProps_CompSpawnCover Props => (CompProps_CompSpawnCover)props;
 
+        public int remainingAmmo;
+
+        public bool isSpawnedTurret = false;
+
+        public override void PostPostMake()
+        {
+            base.PostPostMake();
+            remainingAmmo = Props.ammoCountRange.RandomInRange;
+            if (Props.randomizeAmmo)
+                Props.ammoDef = RandomAmmo();
+        }
+
+        public override void PostExposeData()
+        {
+            base.PostExposeData();
+            Scribe_Values.Look(ref remainingAmmo, "remainingAmmo", 0);
+            Scribe_Defs.Look(ref Props.ammoDef, "ammoDef");
+        }
+
+        public override string CompInspectStringExtra()
+        {
+            var sb = new System.Text.StringBuilder();
+            if (Props.ammoDef != null)
+            {
+                sb.AppendLine("Deployables.Ammo".Translate() + Props.ammoDef.label.CapitalizeFirst());
+                sb.AppendLine("Deployables.RemainingAmmo".Translate() + remainingAmmo);
+            }
+                
+
+            return sb.ToString().TrimEndNewlines();
+        }
+
+        public override IEnumerable<StatDrawEntry> SpecialDisplayStats()
+        {
+            base.SpecialDisplayStats();
+
+            if (Props.ammoDef != null)
+            {
+                yield return new StatDrawEntry(
+                    category: StatCategoryDefOf.Basics,
+                    label: "Deployables.AmmoType".Translate(),
+                    valueString: Props.ammoDef.LabelCap,
+                    reportText: "Deployables.AmmoTypeDescriprion".Translate(),
+                    displayPriorityWithinCategory: 21
+                );
+                yield return new StatDrawEntry(
+                category: StatCategoryDefOf.Basics,
+                label: "Deployables.RemainingAmmo".Translate(),
+                valueString: remainingAmmo.ToString(),
+                reportText: "Deployables.RemainingAmmoDescriprion".Translate(),
+                displayPriorityWithinCategory: 20
+            );
+            }  
+        }
+
+        public override void CompDrawWornExtras()
+        {
+            base.CompDrawWornExtras();
+            if (Props.turretTexPath.NullOrEmpty()) return;
+            if (isSpawnedTurret) return;
+            Material cachedMat = MaterialPool.MatFrom(Props.turretTexPath);
+            Pawn pawn = (parent as Apparel)?.Wearer;
+            Vector3 sightVec = Vector3.ClampMagnitude(pawn.Rotation.FacingCell.ToVector3(), Props.drawSize);
+            Vector3 drawPos = pawn.DrawPos - sightVec + new Vector3(0, -1f, 0f) ;
+            Quaternion rotation = Quaternion.Euler(0, pawn.Rotation.AsAngle + 90f, 0);
+            Matrix4x4 matrix = Matrix4x4.TRS(drawPos, rotation, Vector3.one * Props.drawSize);
+            Mesh mesh = (Props.drawSize > 0.5f) ? MeshPool.plane20 : MeshPool.plane10;
+            Graphics.DrawMesh(mesh, matrix, cachedMat, 0);
+        }
+
+
+        public int TryConsumeAmmo(int amount)
+        {
+            if (Props.infiniteAmmo) return amount;
+
+            int toConsume = System.Math.Min(amount, remainingAmmo);
+            remainingAmmo -= toConsume;
+            return toConsume;
+        }
+
+        public ThingDef RandomAmmo()
+        {
+            ThingDef ammoToUse = null;
+            if (Props.coverThingDef?.building?.turretGunDef != null)
+            {
+                var ammoSet = Props.coverThingDef.building.turretGunDef.GetCompProperties<CompProperties_AmmoUser>()?.ammoSet;
+                if (ammoSet != null && ammoSet.ammoTypes.Any())
+                    ammoToUse = ammoSet.ammoTypes.RandomElement().ammo;
+            }
+            return ammoToUse;
+        }
+
         public void DoEffect(Pawn pawn, ThingWithComps parent)
         {
-            if (pawn == null || Props.coverThingDef == null) return;
+            if (pawn == null || Props.coverThingDef == null
+                || isSpawnedTurret) return;
             var map = pawn.Map; if (map == null) return;
             var stanceBusy = pawn.stances?.curStance as Stance_Busy; if (stanceBusy == null) return;
             Verb verb = stanceBusy.verb;
@@ -46,16 +152,24 @@ namespace Deployables
             Rot4 rotation = Rot4.FromAngleFlat(dirVec.ToVector3().AngleFlat());
             if (Props.doFlip)
                 rotation = new Rot4((rotation.AsInt + 2) % 4);
-
             var cover = GenSpawn.Spawn(thing, cell, map, rotation);
-            
             cover.HitPoints = (int)(cover.MaxHitPoints * (float)parent.HitPoints / parent.MaxHitPoints);
 
-            if (Props.ownerTag)
-                DeployablesOwnerComp.RegisterOwner(thing, pawn, parent);
+            isSpawnedTurret = true;
+            var ammoComp = (cover as Building_TurretGunCE)?.Gun?.TryGetComp<CompAmmoUser>();
+            if (ammoComp != null && Props.ammoDef != null)
+            {
+                //ammoComp.SelectedAmmo = Props.ammoDef as AmmoDef;
+                ammoComp.LoadAmmo(ThingMaker.MakeThing(Props.ammoDef));
+                ammoComp.ResetAmmoCount(Props.ammoDef as AmmoDef);
+            }
 
             if (Props.destroyParentOnUse)
-                DelayedDestroy.Schedule(parent);
+            { 
+                DelayedDestroy.Destroy(parent); 
+            }
+            else if (Props.ownerTag)
+                DeployablesOwnerComp.RegisterOwner(thing, pawn, parent);
 
         }
 
@@ -68,8 +182,17 @@ namespace Deployables
         {
             base.Notify_Unequipped(pawn);
             VerbUtils.UpdatePawnVerbRanges(pawn, true);
+            DelayedDestroy.Destroy(parent);
         }
-
-    }
-
+        public override void Notify_WearerDied()
+        {
+            base.Notify_WearerDied();
+            DelayedDestroy.Destroy(parent);
+        }
+        public override void Notify_Downed()
+        {
+            base.Notify_Downed();
+            DelayedDestroy.Destroy(parent);
+        }
+}
 }

@@ -30,14 +30,24 @@ namespace Deployables
 				{
                     var thing = kvp.Key;
 					var pawn = kvp.Value.Item1;
-                    if (thing.DestroyedOrNull() || pawn.DestroyedOrNull() 
-                        || pawn.Downed || pawn.InMentalState
+                    var parent = kvp.Value.Item2;
+                    if (thing.DestroyedOrNull())
+                    {
+                        _toRemoveBuffer.Add(thing);
+                        parent.TryGetComp<CompSpawnCover>().isSpawnedTurret = false;
+                        continue;
+                    }
+                    if (pawn.DestroyedOrNull()
+                        || pawn.InMentalState || pawn.DeadOrDowned
                         || (pawn.Position - thing.Position).LengthHorizontal > 10f)
                     {
                         _toRemoveBuffer.Add(thing);
+                        DelayedDestroy.Destroy(parent);
+                        DelayedDestroy.Kill(thing);
+                        parent.TryGetComp<CompSpawnCover>().isSpawnedTurret = false;
                         continue;
-                    }    
-						
+                    }
+
                     if (pawn.CurJobDef == JobDefOf.Goto)
                     {
                         //Log.Message($"pawn CurJob is {pawn.CurJob.ToString()}");
@@ -48,7 +58,9 @@ namespace Deployables
                     }
 
                     if (thing.HasComp<CompMannable>()
-                        && pawn.CurJob.def != CombatExtended.CE_JobDefOf.ReloadTurret)
+                        && pawn.CurJob.def != CombatExtended.CE_JobDefOf.ReloadTurret
+                        && pawn.CurJob.def != JobDefOf.Goto
+                        && pawn.CurJob.def != DefDatabase<JobDef>.GetNamed("PickupCover"))
                     {
                        //Log.Message("ManUtils start");
                         ManUtils.ManTow(pawn, thing);
@@ -62,7 +74,8 @@ namespace Deployables
                         if (DeployablesOwnerComp.OwnerMap.TryGetValue(thing, out var value))
                         {
                             var pawn = value.Item1;
-                            if (pawn != null && !pawn.Dead && !pawn.Downed && !pawn.InMentalState)
+                            if (pawn != null && !pawn.Dead && !pawn.Downed && !pawn.InMentalState
+                                && pawn.CanReserveAndReach(thing, PathEndMode.InteractionCell, Danger.None))
                             {
                                 var job = JobMaker.MakeJob(DefDatabase<JobDef>.GetNamed("PickupCover"), thing);
                                 pawn.jobs.StartJob(job, JobCondition.InterruptOptional, null, true, true);
@@ -74,8 +87,10 @@ namespace Deployables
                 if (_toRemoveBuffer.Count > 0)
 				{
 					foreach (var thing in _toRemoveBuffer)
-						OwnerMap.Remove(thing);
-				}
+                    {
+                        OwnerMap.Remove(thing);
+                    }
+                }
                 _toRemoveBuffer.Clear();
                 _toPickupBuffer.Clear();
             }

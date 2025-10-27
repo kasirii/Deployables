@@ -11,7 +11,10 @@ namespace Deployables
 
         protected Thing Cover => job.targetA.Thing;
 
-        public override bool TryMakePreToilReservations(bool errorOnFailed) => true;
+        public override bool TryMakePreToilReservations(bool errorOnFailed)
+        {
+            return pawn.Reserve(Cover, job, 1, -1, null, errorOnFailed);
+        }
 
         protected override IEnumerable<Toil> MakeNewToils()
         {
@@ -20,12 +23,16 @@ namespace Deployables
             this.FailOn(() => pawn == null || pawn.Dead || pawn.Downed);
 
             yield return Toils_Goto.GotoThing(TargetIndex.A, PathEndMode.Touch);
-
+            
             var toil = Toils_General.Wait(WorkTicks);
             toil.WithProgressBarToilDelay(TargetIndex.A);
+            toil.FailOnDestroyedOrNull(TargetIndex.A);
+            toil.FailOnCannotTouch(TargetIndex.A, PathEndMode.Touch);
+            if (Cover == null)
+                EndJobWith(JobCondition.Incompletable);
             toil.AddFinishAction(() =>
             {
-            if (pawn != null && !pawn.Dead && !pawn.Downed && Cover != null && !Cover.DestroyedOrNull())
+            if (pawn != null && !pawn.Dead && !pawn.Downed && !Cover.DestroyedOrNull())
                 PickupCoverUtils.PickupCover(pawn);
             });
             yield return toil;

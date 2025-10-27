@@ -7,7 +7,7 @@
   <description>Pavise with straps, that can be used as deployable cover.</description>
 	
   <graphicData>
-			<texPath>Things/Apparel/Pavise/Pavise</texPath>
+			<texPath>Things/Apparel/MedievalBodyArmorNew/PaviseShield/PaviseShield</texPath>
 			<graphicClass>Graphic_Single</graphicClass>
   </graphicData>
 
@@ -23,15 +23,13 @@
   <comps>
 	  <li Class="Deployables.CompProps_CompUseWhenCast" />
 	  <li Class="Deployables.CompProps_CompSpawnCover">
-      <coverThingDef>Pavise</coverThingDef>
-      <spawnOffset>1</spawnOffset>
-	    <destroyParentOnUse>true</destroyParentOnUse>
-		<ownerTag>true</ownerTag>
-    </li>
+        <coverThingDef>Pavise</coverThingDef>
+		<ownerTag>false</ownerTag>
+      </li>
   </comps>
 	
   <apparel>
-    <wornGraphicPath>Things/Apparel/Pavise/Pavise</wornGraphicPath>
+    <wornGraphicPath>Things/Apparel/MedievalBodyArmorNew/PaviseShield/PaviseShield</wornGraphicPath>
     <wornGraphicData>
         <renderUtilityAsPack>true</renderUtilityAsPack>
         <north>

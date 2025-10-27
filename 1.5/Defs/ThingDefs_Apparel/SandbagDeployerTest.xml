@@ -26,11 +26,9 @@
   <comps>
 	  <li Class="Deployables.CompProps_CompUseWhenCast" />
 	  <li Class="Deployables.CompProps_CompSpawnCover">
-      <coverThingDef>Sandbags</coverThingDef>
-      <spawnOffset>1</spawnOffset>
-		<destroyParentOnUse>true</destroyParentOnUse>
-		<ownerTag>true</ownerTag>
-    </li>
+        <coverThingDef>Sandbags</coverThingDef>
+		<ownerTag>false</ownerTag>
+      </li>
   </comps>
 	
   <apparel>

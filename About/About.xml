@@ -15,10 +15,28 @@
 			<downloadUrl>https://github.com/pardeike/HarmonyRimWorld/releases/latest</downloadUrl>
 			<steamWorkshopUrl>https://steamcommunity.com/workshop/filedetails/?id=2009463077</steamWorkshopUrl>
 		</li>
+		<li>
+			<packageId>CETeam.CombatExtended</packageId>
+			<displayName>Combat Extended</displayName>
+			<downloadUrl>https://github.com/CombatExtended-Continued/CombatExtended</downloadUrl>
+		</li>
+		<li>
+			<packageId>skyarkhangel.HSK</packageId>
+			<displayName>Core SK</displayName>
+			<downloadUrl>https://github.com/skyarkhangel/Hardcore-SK</downloadUrl>
+		</li>
+		<li>
+			<packageId>ViTech.MedievalOverhaul</packageId>
+			<displayName>HMC Vile's Pre-Industrial Overhaul</displayName>
+			<downloadUrl>https://github.com/skyarkhangel/Hardcore-SK</downloadUrl>
+		</li>
 	</modDependencies>
   <loadAfter>
-	  <li>brrainz.harmony</li>
-    <li>Ludeon.RimWorld</li>
+	<li>brrainz.harmony</li>
+	<li>Ludeon.RimWorld</li>
+	<li>CETeam.CombatExtended</li>
+	<li>skyarkhangel.HSK</li>
+	<li>ViTech.MedievalOverhaul</li>
   </loadAfter>
   <incompatibleWith>
   </incompatibleWith>
