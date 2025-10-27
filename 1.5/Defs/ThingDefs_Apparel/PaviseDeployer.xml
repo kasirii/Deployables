@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <Defs>	
 
-<ThingDef ParentName="SK_ApparelNoQualityBase" MayRequire="ViTech.MedievalOverhaul">
+<ThingDef ParentName="Deployable_Pack" MayRequire="ViTech.MedievalOverhaul">
   <defName>Deployable_PaviseTowable</defName>
   <label>Pavise with straps</label>
   <description>Pavise with straps, that can be used as deployable cover.</description>
@@ -14,14 +14,14 @@
 	<statBases>
 		<Mass>2.5</Mass>
 		<Bulk>15</Bulk>
-		<MarketValue>80</MarketValue>
+		<MarketValue>200</MarketValue>
 	</statBases>
 
-	<smeltable>false</smeltable>
-	<destroyOnDrop>false</destroyOnDrop>
+	<equippedStatOffsets>
+		<MoveSpeed>-0.1</MoveSpeed>
+	</equippedStatOffsets>
 	
   <comps>
-	  <li Class="Deployables.CompProps_CompUseWhenCast" />
 	  <li Class="Deployables.CompProps_CompSpawnCover">
         <coverThingDef>Pavise</coverThingDef>
       </li>
@@ -31,6 +31,12 @@
     <wornGraphicPath>Things/Apparel/MedievalBodyArmorNew/PaviseShield/PaviseShield</wornGraphicPath>
     <wornGraphicData>
         <renderUtilityAsPack>true</renderUtilityAsPack>
+		<bodyPartGroups>
+			<li>Waist</li>
+		</bodyPartGroups>
+		<layers>
+			<li>Belt</li>
+		</layers>
         <north>
             <offset>(0,-0.05)</offset>
         </north>
@@ -74,25 +80,8 @@
             <scale>(0.9,0.9)</scale>
         </fat>
     </wornGraphicData>
-	  
-    <countsAsClothingForNudity>false</countsAsClothingForNudity>
-    <careIfWornByCorpse>false</careIfWornByCorpse>
-    <careIfDamaged>false</careIfDamaged>
-    <wearPerDay>0</wearPerDay>
-    <bodyPartGroups>
-        <li>Waist</li>
-    </bodyPartGroups>
-    <layers>
-        <li>Belt</li>
-    </layers>
   </apparel>
-    <thingCategories>
-        <li>ApparelUtility</li>
-    </thingCategories>
-    <tradeTags>
-        <li>Clothing</li>
-        <li>Armor</li>
-    </tradeTags>
+	<techLevel>Neolithic</techLevel>
 </ThingDef>
 
 </Defs>

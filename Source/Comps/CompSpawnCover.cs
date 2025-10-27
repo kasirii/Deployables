@@ -22,9 +22,6 @@ namespace Deployables
         public bool randomizeAmmo = false;
         public bool infiniteAmmo = false;
 
-        public string turretTexPath;
-        public float drawSize = 1f;
-
         public CompProps_CompSpawnCover()
         {
             this.compClass = typeof(CompSpawnCover);
@@ -98,16 +95,17 @@ namespace Deployables
         public override void CompDrawWornExtras()
         {
             base.CompDrawWornExtras();
-            if (Props.turretTexPath.NullOrEmpty()) return;
-            if (isSpawnedTurret) return;
-            Material cachedMat = MaterialPool.MatFrom(Props.turretTexPath);
+            if (isSpawnedTurret || !isCoverTurret) return;
+            ThingDef gunDef = Props.coverThingDef.building.turretGunDef;
+            Graphic graphic = gunDef.graphicData.Graphic;
             Pawn pawn = (parent as Apparel)?.Wearer;
-            Vector3 sightVec = Vector3.ClampMagnitude(pawn.Rotation.FacingCell.ToVector3(), Props.drawSize);
+            Rot4 rot = pawn.Rotation;
+            Vector3 sightVec = rot.FacingCell.ToVector3() * Props.coverThingDef.building.turretTopDrawSize / 2f;
             Vector3 drawPos = pawn.DrawPos - sightVec + new Vector3(0, -1f, 0f) ;
-            Quaternion rotation = Quaternion.Euler(0, pawn.Rotation.AsAngle + 90f, 0);
-            Matrix4x4 matrix = Matrix4x4.TRS(drawPos, rotation, Vector3.one * Props.drawSize);
-            Mesh mesh = (Props.drawSize > 0.5f) ? MeshPool.plane20 : MeshPool.plane10;
-            Graphics.DrawMesh(mesh, matrix, cachedMat, 0);
+            Quaternion quaternion = Quaternion.Euler(0, rot.AsAngle + 90f, 0);
+            Matrix4x4 matrix = Matrix4x4.TRS(drawPos, quaternion, Vector3.one * Props.coverThingDef.building.turretTopDrawSize);
+            Material mat = graphic.MatAt(rot);
+            Graphics.DrawMesh(MeshPool.plane10, matrix, mat, 0);
         }
 
 
@@ -198,5 +196,5 @@ namespace Deployables
             base.Notify_Downed();
             DelayedDestroy.Destroy(parent);
         }
-}
+    }
 }

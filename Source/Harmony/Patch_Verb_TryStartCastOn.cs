@@ -18,21 +18,26 @@ namespace Deployables
         {
             try
             {
-                if (!(__instance is Verb_Shoot || __instance is CombatExtended.Verb_ShootCE)) return;
-
-                if (!__instance.CasterIsPawn) return;
-
-                var pawn = __instance.CasterPawn;
-                if (pawn == null || pawn.apparel == null) return;
-
-                var weapon = pawn.equipment?.Primary;
-                if (weapon?.def == null) return;
-
-                foreach (var comp in pawn.apparel.WornApparel
-                             .SelectMany(a => a.AllComps)
-                             .OfType<CompUseWhenCast>())
+                if (__instance is Verb_Shoot || __instance is CombatExtended.Verb_ShootCE)
                 {
-                    comp.OnUse(pawn);
+                    var pawn = __instance.CasterPawn;
+                    if (pawn == null || !__instance.CasterIsPawn) return;
+
+                    var equipment = pawn.equipment;
+                    if (equipment == null) return;
+
+                    var weaponDef = equipment.Primary?.def;
+                    if (weaponDef == null || !weaponDef.IsRangedWeapon) return;
+
+                    var wornApparel = pawn.apparel?.WornApparel;
+                    if (wornApparel == null) return;
+
+                    foreach (var comp in wornApparel
+                                .SelectMany(a => a.AllComps)
+                                .OfType<CompUseWhenCast>())
+                    {
+                        comp.OnUse(pawn);
+                    }
                 }
             }
             catch (System.Exception) {}

@@ -8,6 +8,7 @@
 	<stuffCategories>
 		<li>Woody</li>
 	</stuffCategories>
+	<techLevel>Neolithic</techLevel>
   <comps>
 	  <li Class="Deployables.CompProps_CompSpawnCover">
 		<coverThingDef>MedievalTimes_Ballista</coverThingDef>
@@ -20,8 +21,6 @@
 			<max>10</max>
 		</ammoCountRange>
 		<randomizeAmmo>true</randomizeAmmo>
-		<turretTexPath>Things/Building/Security/Medieval_Ballista_Top</turretTexPath>
-		<drawSize>1</drawSize>
 	  </li>
   </comps>
 </ThingDef>
@@ -33,6 +32,7 @@
 		<stuffCategories>
 			<li>StrongMetallic</li>
 		</stuffCategories>
+		<techLevel>Medieval</techLevel>
 		<comps>
 			<li Class="Deployables.CompProps_CompSpawnCover">
 				<coverThingDef>Turret_3inOrdinanceRifle</coverThingDef>
@@ -42,8 +42,6 @@
 				<doFlip>false</doFlip>
 				<!--<ammoDef>Ammo_3inCannon_Shell</ammoDef>-->
 				<randomizeAmmo>true</randomizeAmmo>
-				<turretTexPath>Things/Turret/3inOrdinanceRifle_Top</turretTexPath>
-				<drawSize>2</drawSize>
 			</li>
 		</comps>
 	</ThingDef>
@@ -55,6 +53,7 @@
 		<stuffCategories>
 			<li>StrongMetallic</li>
 		</stuffCategories>
+		<techLevel>Industrial</techLevel>
 		<comps>
 			<li Class="Deployables.CompProps_CompSpawnCover">
 				<coverThingDef>Turret_Gatling</coverThingDef>
@@ -67,8 +66,6 @@
 					<max>150</max>
 				</ammoCountRange>
 				<randomizeAmmo>true</randomizeAmmo>
-				<turretTexPath>Things/Turret/Gatling_Top</turretTexPath>
-				<drawSize>2</drawSize>
 			</li>
 		</comps>
 	</ThingDef>
@@ -80,6 +77,7 @@
 		<stuffCategories>
 			<li>StrongMetallic</li>
 		</stuffCategories>
+		<techLevel>Spacer</techLevel>
 		<comps>
 			<li Class="Deployables.CompProps_CompSpawnCover">
 				<coverThingDef>Turret_TOWLauncher</coverThingDef>
@@ -88,8 +86,6 @@
 				<ownerTag>true</ownerTag>
 				<doFlip>false</doFlip>
 				<randomizeAmmo>true</randomizeAmmo>
-				<turretTexPath>Things/Building/Security/TOWLauncher_Top</turretTexPath>
-				<drawSize>1</drawSize>
 			</li>
 		</comps>
 	</ThingDef>
@@ -101,6 +97,7 @@
 		<stuffCategories>
 			<li>StrongMetallic</li>
 		</stuffCategories>
+		<techLevel>Spacer</techLevel>
 		<comps>
 			<li Class="Deployables.CompProps_CompSpawnCover">
 				<coverThingDef>LightMissileSystem</coverThingDef>
@@ -109,8 +106,6 @@
 				<ownerTag>true</ownerTag>
 				<doFlip>false</doFlip>
 				<randomizeAmmo>true</randomizeAmmo>
-				<turretTexPath>Things/Building/Security/FGM_Javelin_Top</turretTexPath>
-				<drawSize>1</drawSize>
 			</li>
 		</comps>
 	</ThingDef>

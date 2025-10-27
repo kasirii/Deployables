@@ -1,16 +1,26 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<Defs>	
-
-<ThingDef Name="Deployable_Pack" ParentName="SK_ApparelNoQualityBase" MayRequire="skyarkhangel.HSK">
-	<defName>Deployable_Pack</defName>
-	<label>Deployable pack</label>
+<Defs>
+	<ThingCategoryDef>
+		<defName>Deployable</defName>
+		<label>Deployable</label>
+		<parent>ApparelUtility</parent>
+	</ThingCategoryDef>
+<ThingDef Name="Deployable_Pack" ParentName="SK_ApparelNoQualityBase" Abstract="True" MayRequire="skyarkhangel.HSK">
 	<statBases>
 		<Mass>2.0</Mass>
-		<MarketValue>80</MarketValue>
+		<Bulk>2</Bulk>
+		<WornBulk>2</WornBulk>
+		<MarketValue>200</MarketValue>
+		<StuffEffectMultiplierInsulation_Cold>0</StuffEffectMultiplierInsulation_Cold>
+		<StuffEffectMultiplierInsulation_Heat>0</StuffEffectMultiplierInsulation_Heat>
+		<StuffEffectMultiplierArmor>0</StuffEffectMultiplierArmor>
+		<ArmorRating_Sharp>0</ArmorRating_Sharp>
+		<ArmorRating_Blunt>0</ArmorRating_Blunt>
+		<ArmorRating_Heat>0</ArmorRating_Heat>
 	</statBases>
 
 	<smeltable>false</smeltable>
-	<destroyOnDrop>false</destroyOnDrop>
+	<destroyOnDrop>true</destroyOnDrop>
 	<graphicData>
 		<texPath>Things/Apparel/OneTimeCoverDevice/OneTimeCoverDevice</texPath>
 		<graphicClass>Graphic_Single</graphicClass>
@@ -21,10 +31,11 @@
 
 	<equippedStatOffsets>
 		<MoveSpeed>-1</MoveSpeed>
-
+		<Suppressability>-0.2</Suppressability>
 	</equippedStatOffsets>
+	<generateCommonality>1</generateCommonality>
   <apparel>
-	  <wornGraphicPath>Things/Apparel/OneTimeCoverDevice/OneTimeCoverDevice</wornGraphicPath>
+	<wornGraphicPath>Things/Apparel/Apparellonew/Belt/Belt</wornGraphicPath>
     <countsAsClothingForNudity>false</countsAsClothingForNudity>
     <careIfWornByCorpse>false</careIfWornByCorpse>
     <careIfDamaged>false</careIfDamaged>
@@ -35,15 +46,21 @@
     <layers>
 		<li>Shell</li>
     </layers>
-	  <canBeDesiredForIdeo>false</canBeDesiredForIdeo>
+	  <tags>
+		  <li>NorbalKingly</li>
+		  <li>NorbalWarrior</li>
+		  <li>Medieval</li>
+		  <li>Legion</li>
+	  </tags>
+	  
+	  <defaultOutfitTags>
+		  <li>Soldier</li>
+	  </defaultOutfitTags>
+	<canBeDesiredForIdeo>false</canBeDesiredForIdeo>
   </apparel>
-    <thingCategories>
-        <li>ApparelUtility</li>
-    </thingCategories>
-    <tradeTags>
-        <li>Clothing</li>
-        <li>Armor</li>
-    </tradeTags>
+	<thingCategories>
+		<li>Deployable</li>
+	</thingCategories>
 </ThingDef>
 
 </Defs>

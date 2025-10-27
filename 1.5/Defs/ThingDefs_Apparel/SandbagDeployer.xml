@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <Defs>	
 
-<ThingDef ParentName="SK_ApparelNoQualityBase" MayRequire="skyarkhangel.HSK">
+<ThingDef ParentName="Deployable_Pack" MayRequire="skyarkhangel.HSK">
   <defName>Deployable_SandbagsTowable</defName>
   <label>Sandbags with straps</label>
   <description>Sandbags with straps, that can be used as deployable cover.</description>
@@ -16,15 +16,16 @@
 	</stuffCategories>
 
 	<statBases>
-		<Mass>2.0</Mass>
-		<MarketValue>80</MarketValue>
+		<Mass>5</Mass>
+		<Bulk>10</Bulk>
+		<MarketValue>100</MarketValue>
 	</statBases>
 
-	<smeltable>false</smeltable>
-	<destroyOnDrop>false</destroyOnDrop>
+	<equippedStatOffsets>
+		<MoveSpeed>-0.1</MoveSpeed>
+	</equippedStatOffsets>
 	
   <comps>
-	  <li Class="Deployables.CompProps_CompUseWhenCast" />
 	  <li Class="Deployables.CompProps_CompSpawnCover">
         <coverThingDef>Sandbags</coverThingDef>
       </li>
@@ -32,25 +33,8 @@
 	
   <apparel>
     <wornGraphicPath>Things/Apparel/BeltWithSandbags/Belt</wornGraphicPath>
-	  
-    <countsAsClothingForNudity>false</countsAsClothingForNudity>
-    <careIfWornByCorpse>false</careIfWornByCorpse>
-    <careIfDamaged>false</careIfDamaged>
-    <wearPerDay>0</wearPerDay>
-    <bodyPartGroups>
-        <li>Waist</li>
-    </bodyPartGroups>
-    <layers>
-        <li>Shell</li>
-    </layers>
   </apparel>
-    <thingCategories>
-        <li>ApparelUtility</li>
-    </thingCategories>
-    <tradeTags>
-        <li>Clothing</li>
-        <li>Armor</li>
-    </tradeTags>
+	<techLevel>Industrial</techLevel>
 </ThingDef>
 
 </Defs>

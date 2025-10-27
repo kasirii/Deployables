@@ -40,17 +40,14 @@
     <bodyPartGroups>
         <li>Waist</li>
     </bodyPartGroups>
-    <layers>
-        <li>Shell</li>
-    </layers>
+	  <layers>
+		  <li>Belt</li>
+	  </layers>
   </apparel>
-    <thingCategories>
-        <li>ApparelUtility</li>
-    </thingCategories>
-    <tradeTags>
-        <li>Clothing</li>
-        <li>Armor</li>
-    </tradeTags>
+	<thingCategories>
+		<li>Deployable</li>
+	</thingCategories>
+	<techLevel>Industrial</techLevel>
 </ThingDef>
 
 </Defs>
