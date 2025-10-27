@@ -2,6 +2,7 @@ using RimWorld;
 using Verse;
 using Verse.AI;
 using System.Collections.Generic;
+using System.Linq;
 
 
 namespace Deployables
@@ -14,7 +15,7 @@ namespace Deployables
 
         public static void RegisterOwner(Thing thing, Pawn pawn, Thing parent)
         {
-            if (thing == null || pawn == null) return;
+            if (thing == null || pawn == null || parent == null) return;
             OwnerMap[thing] = (pawn, parent);
 		}
 
@@ -34,7 +35,8 @@ namespace Deployables
                     if (thing.DestroyedOrNull())
                     {
                         _toRemoveBuffer.Add(thing);
-                        parent.TryGetComp<CompSpawnCover>().isSpawnedTurret = false;
+                        if (parent.TryGetComp<CompSpawnCover>().isCoverTurret)
+                            parent.TryGetComp<CompSpawnCover>().isSpawnedTurret = false;
                         continue;
                     }
                     if (pawn.DestroyedOrNull()
@@ -44,32 +46,26 @@ namespace Deployables
                         _toRemoveBuffer.Add(thing);
                         DelayedDestroy.Destroy(parent);
                         DelayedDestroy.Kill(thing);
-                        parent.TryGetComp<CompSpawnCover>().isSpawnedTurret = false;
+                        if (parent.TryGetComp<CompSpawnCover>().isCoverTurret)
+                            parent.TryGetComp<CompSpawnCover>().isSpawnedTurret = false;
                         continue;
                     }
 
-                    if (pawn.CurJobDef == JobDefOf.Goto)
-                    {
-                        //Log.Message($"pawn CurJob is {pawn.CurJob.ToString()}");
-                        if ((pawn.CurJob.targetA.Cell - thing.Position).LengthHorizontal > 1.5f)
-                        {
+                    if (pawn.CurJobDef == JobDefOf.Goto
+                        && (pawn.CurJob.targetA.Cell - thing.Position).LengthHorizontal > 1.5f)
                             _toPickupBuffer.Add(thing);
-                        }
-                    }
+
 
                     if (thing.HasComp<CompMannable>()
                         && pawn.CurJob.def != CombatExtended.CE_JobDefOf.ReloadTurret
                         && pawn.CurJob.def != JobDefOf.Goto
                         && pawn.CurJob.def != DefDatabase<JobDef>.GetNamed("PickupCover"))
-                    {
-                       //Log.Message("ManUtils start");
-                        ManUtils.ManTow(pawn, thing);
-                    }
+                            ManUtils.ManTow(pawn, thing);
                 }
 
                 if (_toPickupBuffer.Count > 0)
                 {
-                    foreach (var thing in _toPickupBuffer)
+                    foreach (var thing in _toPickupBuffer.ToList())
                     {
                         if (DeployablesOwnerComp.OwnerMap.TryGetValue(thing, out var value))
                         {
@@ -86,7 +82,7 @@ namespace Deployables
 
                 if (_toRemoveBuffer.Count > 0)
 				{
-					foreach (var thing in _toRemoveBuffer)
+					foreach (var thing in _toRemoveBuffer.ToList())
                     {
                         OwnerMap.Remove(thing);
                     }

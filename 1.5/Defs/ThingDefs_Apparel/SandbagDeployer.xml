@@ -27,7 +27,6 @@
 	  <li Class="Deployables.CompProps_CompUseWhenCast" />
 	  <li Class="Deployables.CompProps_CompSpawnCover">
         <coverThingDef>Sandbags</coverThingDef>
-		<ownerTag>false</ownerTag>
       </li>
   </comps>
 	

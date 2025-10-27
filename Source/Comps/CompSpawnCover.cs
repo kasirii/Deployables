@@ -39,18 +39,25 @@ namespace Deployables
 
         public bool isSpawnedTurret = false;
 
+        public bool isCoverTurret = false;
+
         public override void PostPostMake()
         {
             base.PostPostMake();
-            remainingAmmo = Props.ammoCountRange.RandomInRange;
-            if (Props.randomizeAmmo)
-                Props.ammoDef = RandomAmmo();
+            if (Props.coverThingDef.thingClass != null && typeof(Building_Turret).IsAssignableFrom(Props.coverThingDef.thingClass))
+            {
+                isCoverTurret = true;
+                remainingAmmo = Props.ammoCountRange.RandomInRange;
+                if (Props.randomizeAmmo)
+                    Props.ammoDef = RandomAmmo();
+            }
         }
 
         public override void PostExposeData()
         {
             base.PostExposeData();
             Scribe_Values.Look(ref remainingAmmo, "remainingAmmo", 0);
+            Scribe_Values.Look(ref isCoverTurret, "isCoverTurret", false);
             Scribe_Defs.Look(ref Props.ammoDef, "ammoDef");
         }
 
@@ -62,8 +69,6 @@ namespace Deployables
                 sb.AppendLine("Deployables.Ammo".Translate() + Props.ammoDef.label.CapitalizeFirst());
                 sb.AppendLine("Deployables.RemainingAmmo".Translate() + remainingAmmo);
             }
-                
-
             return sb.ToString().TrimEndNewlines();
         }
 
@@ -109,7 +114,6 @@ namespace Deployables
         public int TryConsumeAmmo(int amount)
         {
             if (Props.infiniteAmmo) return amount;
-
             int toConsume = System.Math.Min(amount, remainingAmmo);
             remainingAmmo -= toConsume;
             return toConsume;
@@ -155,33 +159,33 @@ namespace Deployables
             var cover = GenSpawn.Spawn(thing, cell, map, rotation);
             cover.HitPoints = (int)(cover.MaxHitPoints * (float)parent.HitPoints / parent.MaxHitPoints);
 
-            isSpawnedTurret = true;
-            var ammoComp = (cover as Building_TurretGunCE)?.Gun?.TryGetComp<CompAmmoUser>();
-            if (ammoComp != null && Props.ammoDef != null)
+            if (isCoverTurret)
             {
-                //ammoComp.SelectedAmmo = Props.ammoDef as AmmoDef;
-                ammoComp.LoadAmmo(ThingMaker.MakeThing(Props.ammoDef));
-                ammoComp.ResetAmmoCount(Props.ammoDef as AmmoDef);
+                isSpawnedTurret = true;
+                var ammoComp = (cover as Building_TurretGunCE)?.Gun?.TryGetComp<CompAmmoUser>();
+                if (ammoComp != null && Props.ammoDef != null)
+                {
+                    ammoComp.LoadAmmo(ThingMaker.MakeThing(Props.ammoDef));
+                    ammoComp.ResetAmmoCount(Props.ammoDef as AmmoDef);
+                }
             }
-
-            if (Props.destroyParentOnUse)
-            { 
-                DelayedDestroy.Destroy(parent); 
-            }
-            else if (Props.ownerTag)
+            if (Props.ownerTag)
                 DeployablesOwnerComp.RegisterOwner(thing, pawn, parent);
-
+            if (Props.destroyParentOnUse)
+                DelayedDestroy.Destroy(parent); 
         }
 
         public override void Notify_Equipped(Pawn pawn)
         {
             base.Notify_Equipped(pawn);
-            VerbUtils.UpdatePawnVerbRanges(pawn, true);
+            if (isCoverTurret)
+                VerbUtils.UpdatePawnVerbRanges(pawn, true);
         }
         public override void Notify_Unequipped(Pawn pawn)
         {
             base.Notify_Unequipped(pawn);
-            VerbUtils.UpdatePawnVerbRanges(pawn, true);
+            if (isCoverTurret)
+                VerbUtils.UpdatePawnVerbRanges(pawn, true);
             DelayedDestroy.Destroy(parent);
         }
         public override void Notify_WearerDied()

@@ -9,7 +9,7 @@ namespace Deployables
     {
         private const int WorkTicks = 30;
 
-        protected Thing Cover => job.targetA.Thing;
+        private Thing Cover => job.targetA.Thing;
 
         public override bool TryMakePreToilReservations(bool errorOnFailed)
         {

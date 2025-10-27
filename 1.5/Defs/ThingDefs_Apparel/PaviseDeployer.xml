@@ -24,7 +24,6 @@
 	  <li Class="Deployables.CompProps_CompUseWhenCast" />
 	  <li Class="Deployables.CompProps_CompSpawnCover">
         <coverThingDef>Pavise</coverThingDef>
-		<ownerTag>false</ownerTag>
       </li>
   </comps>
 	
