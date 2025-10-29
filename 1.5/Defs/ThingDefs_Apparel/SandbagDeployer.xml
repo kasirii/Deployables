@@ -34,7 +34,7 @@
   <apparel>
     <wornGraphicPath>Things/Apparel/BeltWithSandbags/Belt</wornGraphicPath>
   </apparel>
-	<techLevel>Industrial</techLevel>
+<techLevel>Neolithic</techLevel>
 </ThingDef>
 
 </Defs>

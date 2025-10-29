@@ -1,109 +1,82 @@
-using System.Linq;
 using System.Collections.Generic;
 using RimWorld;
 using Verse;
-using HarmonyLib;
 using CombatExtended;
 
 namespace Deployables
 {
     public static class VerbUtils
     {
-        private static Dictionary<Verb, VerbProperties> oldProperties = new Dictionary<Verb, VerbProperties>();
+        private static readonly Dictionary<Verb, VerbProperties> oldProperties = new Dictionary<Verb, VerbProperties>();
 
-        public static void UpdatePawnVerbRanges(Pawn pawn, bool force)
+        public static void UpdatePawnVerbRanges(Pawn pawn, CompSpawnCover coverComp, bool force)
         {
             if (pawn == null) return;
 
-            bool hasPack = pawn.apparel?.WornApparel?
-                .SelectMany(a => a.AllComps)
-                .OfType<CompSpawnCover>()
-                .Any(c => c?.Props?.coverThingDef != null) ?? false;
+            var verbs = pawn.equipment?.AllEquipmentVerbs;
+            if (verbs == null) return;
 
-            if (hasPack && force)
+            if (force)
             {
-                var comp = pawn.apparel.WornApparel
-                    .SelectMany(a => a.AllComps)
-                    .OfType<CompSpawnCover>()
-                    .FirstOrDefault();
-                var coverThingDef = comp?.Props?.coverThingDef;
-                if (coverThingDef == null) return;
+                var coverThingDef = coverComp?.Props?.coverThingDef;
+                var turretProps = coverThingDef?.building;
+                var gunDef = turretProps?.turretGunDef;
+                if (gunDef?.Verbs == null || gunDef.Verbs.Count == 0) return;
 
-                var turretProps = coverThingDef.building;
-                if (turretProps == null || turretProps.turretGunDef == null) return;
-
-                var gunDef = turretProps.turretGunDef;
-                var gunVerb = gunDef.Verbs?.FirstOrDefault(v =>
-                    typeof(Verb_ShootCE).IsAssignableFrom(v.verbClass) ||
-                    typeof(Verb_Shoot).IsAssignableFrom(v.verbClass));
-
+                VerbProperties gunVerb = null;
+                foreach (var v in gunDef.Verbs)
+                {
+                    var cls = v.verbClass;
+                    if (cls == typeof(Verb_Shoot) || cls == typeof(Verb_ShootCE))
+                    {
+                        gunVerb = v;
+                        break;
+                    }
+                }
                 if (gunVerb == null) return;
 
                 float range = gunVerb.range;
                 float minRange = gunVerb.minRange;
 
-                foreach (var verb in GetAllVerbs(pawn))
-                    ModifyVerb(verb, range, minRange);
+                foreach (var verb in verbs)
+                {
+                    if (verb is Verb_Shoot || verb is Verb_ShootCE)
+                        ModifyVerb(verb, range, minRange);
+                }
 
             }
             else
             {
-                foreach (var verb in GetAllVerbs(pawn))
-                    TryResetVerbProps(verb);
+                foreach (var verb in verbs)
+                {
+                    if (verb is Verb_Shoot || verb is Verb_ShootCE)
+                        TryResetVerbProps(verb);
+                }
             }
         }
 
         private static void ModifyVerb(Verb verb, float newRange, float minRange)
         {
-            if (verb.verbProps.range == newRange && verb.verbProps.minRange == minRange) return;
-            oldProperties[verb] = verb.verbProps;
-            SetVerbRange(verb, newRange, minRange);
-            
-        }
+            var props = verb.verbProps;
+            if (props == null || (props.range == newRange && props.minRange == minRange)) return;
 
-        public static void SetVerbRange(Verb verb, float newRange, float minRange)
-        {
-            var propsCopy = verb.verbProps.MemberwiseClone() as VerbProperties;
-            if (propsCopy == null) return;
+            if (!oldProperties.ContainsKey(verb))
+                oldProperties[verb] = props;
 
-            var rangeField = Traverse.Create(propsCopy).Field("range");
-            if (rangeField != null)
-                rangeField.SetValue(newRange);
+            VerbProperties propsCopy = verb.verbProps.MemberwiseClone();
 
-            var minRangeField = Traverse.Create(propsCopy).Field("minRange");
-            if (minRangeField != null)
-                minRangeField.SetValue(minRange);
-
+            propsCopy.range = newRange;
+            propsCopy.minRange = minRange;
             verb.verbProps = propsCopy;
         }
 
         private static void TryResetVerbProps(Verb verb)
         {
-            if (oldProperties.TryGetValue(verb, out var oldVerbProps)) verb.verbProps = oldVerbProps;
-        }
-
-        private static List<Verb> GetAllVerbs(Pawn pawn)
-        {
-            var allVerbs = new List<Verb>();
-
-            if (pawn.VerbTracker != null)
+            if (oldProperties.TryGetValue(verb, out var oldVerbProps))
             {
-                //allVerbs.AddRange(pawn.VerbTracker.AllVerbs);
+                verb.verbProps = oldVerbProps;
+                oldProperties.Remove(verb);
             }
-
-            if (pawn.equipment != null)
-            {
-                allVerbs.AddRange(pawn.equipment.AllEquipmentVerbs.
-                    Where(v => v != null && (v is Verb_Shoot || v is Verb_ShootCE)).ToList());
-                //allVerbs.AddRange(pawn.equipment.AllEquipmentVerbs);
-            }
-
-            if (pawn.apparel != null)
-            {
-                //allVerbs.AddRange(pawn.apparel.AllApparelVerbs);
-            }
-
-            return allVerbs;
         }
     }
 }

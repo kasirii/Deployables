@@ -36,21 +36,13 @@
 
 	<ItemGroup>
 		<Compile Include="Comps/CompSpawnCover.cs" />
-		<Compile Include="Comps/CompUseWhenCast.cs" />
-		<Compile Include="MapComps/DeployablesOwnerComp.cs" />
-		<Compile Include="MapComps/DelayedDestroy.cs" />
 		<Compile Include="Utils/PickupCoverUtils.cs" />
 		<Compile Include="Utils/ManUtils.cs" />
 		<Compile Include="Utils/VerbUtils.cs" />
 		<Compile Include="JobDrivers/PickupCoverJob.cs" />
 		<Compile Include="Harmony/HarmonyInit.cs" />
 		<Compile Include="Harmony/Patch_Verb_TryStartCastOn.cs" />
-		<Compile Include="Harmony/Patch_Pawn_Tick.cs" />
-		<Compile Include="Harmony/Patch_PawnDowned.cs" />
 		
-
-
-
 	</ItemGroup>
 
   <ItemGroup>

@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+	<ThingDef ParentName="Deployable_Pack" MayRequire="XxNelsonxX.Parabellum">
+		<defName>Deployable_PaK36ATGPack</defName>
+		<label>PaK36ATG pack</label>
+		<description>Foldable PaK36ATG Cannon that can be deployed and manned in combat.</description>
+		<stuffCategories>
+			<li>StrongMetallic</li>
+		</stuffCategories>
+		<techLevel>Industrial</techLevel>
+		<comps>
+			<li Class="Deployables.CompProps_CompSpawnCover">
+				<coverThingDef>Turret_PaK36ATG</coverThingDef>
+				<spawnOffset>1</spawnOffset>
+				<doFlip>false</doFlip>
+				<randomizeAmmo>true</randomizeAmmo>
+			</li>
+		</comps>
+	</ThingDef>
+
+	<ThingDef ParentName="Deployable_Pack" MayRequire="XxNelsonxX.Parabellum">
+		<defName>Deployable_MK103AAPack</defName>
+		<label>MK103AA pack</label>
+		<description>Foldable MK103AA flak that can be deployed and manned in combat.</description>
+		<stuffCategories>
+			<li>StrongMetallic</li>
+		</stuffCategories>
+		<techLevel>Industrial</techLevel>
+		<comps>
+			<li Class="Deployables.CompProps_CompSpawnCover">
+				<coverThingDef>Turret_MK103AA</coverThingDef>
+				<spawnOffset>1</spawnOffset>
+				<doFlip>false</doFlip>
+				<ammoCountRange>
+					<min>50</min>
+					<max>75</max>
+				</ammoCountRange>
+				<randomizeAmmo>true</randomizeAmmo>
+			</li>
+		</comps>
+	</ThingDef>
+
+	<ThingDef ParentName="Deployable_Pack" MayRequire="XxNelsonxX.Parabellum">
+		<defName>Deployable_PaK38ATGPack</defName>
+		<label>PaK38ATG pack</label>
+		<description>Foldable PaK38ATG flak that can be deployed and manned in combat.</description>
+		<stuffCategories>
+			<li>StrongMetallic</li>
+		</stuffCategories>
+		<techLevel>Industrial</techLevel>
+		<comps>
+			<li Class="Deployables.CompProps_CompSpawnCover">
+				<coverThingDef>Turret_PaK38ATG</coverThingDef>
+				<spawnOffset>1</spawnOffset>
+				<doFlip>false</doFlip>
+				<ammoCountRange>
+					<min>3</min>
+					<max>5</max>
+				</ammoCountRange>
+				<randomizeAmmo>true</randomizeAmmo>
+			</li>
+		</comps>
+	</ThingDef>
+
+	<ThingDef ParentName="Deployable_Pack" MayRequire="XxNelsonxX.Parabellum">
+		<defName>Deployable_ParabellumMachinegunPack</defName>
+		<label>Parabellum Machinegun pack</label>
+		<description>Foldable Parabellum machinegun that can be deployed and manned in combat.</description>
+		<stuffCategories>
+			<li>StrongMetallic</li>
+		</stuffCategories>
+		<techLevel>Industrial</techLevel>
+		<comps>
+			<li Class="Deployables.CompProps_CompSpawnCover">
+				<coverThingList>
+				<li>
+					<thingDef>Turret_Vickers</thingDef>
+				</li>
+				<li>
+					<thingDef>Turret_MG08MMG</thingDef>
+				</li>
+				</coverThingList>
+				<li>
+					<thingDef>Turret_Mx4AA</thingDef>
+					<weight>0.3</weight>
+				</li>
+				<spawnOffset>1</spawnOffset>
+				<doFlip>false</doFlip>
+				<ammoCountRange>
+					<min>130</min>
+					<max>150</max>
+				</ammoCountRange>
+				<randomizeAmmo>true</randomizeAmmo>
+			</li>
+		</comps>
+	</ThingDef>
+
+	<ThingDef ParentName="Deployable_Pack" MayRequire="XxNelsonxX.Parabellum">
+		<defName>Deployable_ParabellumMGPack</defName>
+		<label>Parabellum MG series pack</label>
+		<description>Foldable Parabellum MG's that can be deployed and manned in combat.</description>
+		<stuffCategories>
+			<li>StrongMetallic</li>
+		</stuffCategories>
+		<techLevel>Industrial</techLevel>
+		<comps>
+			<li Class="Deployables.CompProps_CompSpawnCover">
+				<coverThingList>
+				<li>
+					<thingDef>Turret_MG34Z</thingDef>
+				</li>
+				<li>
+					<thingDef>Turret_MG42M</thingDef>
+				</li>
+				<li>
+					<thingDef>Turret_MG45Z</thingDef>
+				</li>
+				</coverThingList>
+				<spawnOffset>1</spawnOffset>
+				<doFlip>false</doFlip>
+				<ammoCountRange>
+					<min>230</min>
+					<max>250</max>
+				</ammoCountRange>
+				<randomizeAmmo>true</randomizeAmmo>
+			</li>
+		</comps>
+	</ThingDef>
+
+	<ThingDef ParentName="Deployable_Pack" MayRequire="XxNelsonxX.Parabellum">
+		<defName>Deployable_WurfrahmenPack</defName>
+		<label>Wurfrahmen pack</label>
+		<description>Foldable base destroyer that can be deployed and manned in combat.</description>
+		<stuffCategories>
+			<li>Woody</li>
+		</stuffCategories>
+		<techLevel>Ultra</techLevel>
+		<comps>
+			<li Class="Deployables.CompProps_CompSpawnCover">
+				<coverThingDef>Turret_NbW</coverThingDef>
+				<spawnOffset>1</spawnOffset>
+				<doFlip>false</doFlip>
+				<ammoCountRange>
+					<min>1</min>
+					<max>1</max>
+				</ammoCountRange>
+				<randomizeAmmo>true</randomizeAmmo>
+			</li>
+		</comps>
+	</ThingDef>
+
+	<ThingDef ParentName="Deployable_Pack" MayRequire="XxNelsonxX.Parabellum">
+		<defName>Deployable_ATRLPack</defName>
+		<label>Anti-Tank Rocket Launcher pack</label>
+		<description>Foldable Anti-Tank Rocket Launcher that can be deployed and manned in combat.</description>
+		<stuffCategories>
+			<li>StrongMetallic</li>
+		</stuffCategories>
+		<techLevel>Spacer</techLevel>
+		<comps>
+			<li Class="Deployables.CompProps_CompSpawnCover">
+				<coverThingList>
+					<li>
+						<thingDef>Turret_RW</thingDef>
+					</li>
+					<li>
+						<thingDef>Turret_SPG9M</thingDef>
+					</li>
+					<li>
+						<thingDef>Turret_MG45Z</thingDef>
+					</li>
+				</coverThingList>
+				<spawnOffset>1</spawnOffset>
+				<doFlip>false</doFlip>
+				<ammoCountRange>
+					<min>3</min>
+					<max>5</max>
+				</ammoCountRange>
+				<randomizeAmmo>true</randomizeAmmo>
+			</li>
+		</comps>
+	</ThingDef>
+
+	<ThingDef ParentName="Deployable_Pack" MayRequire="XxNelsonxX.Parabellum">
+		<defName>Deployable_WombatPack</defName>
+		<label>Wombat pack</label>
+		<description>Foldable Anti-Tank Gun that can be deployed and manned in combat.</description>
+		<stuffCategories>
+			<li>StrongMetallic</li>
+		</stuffCategories>
+		<techLevel>Spacer</techLevel>
+		<comps>
+			<li Class="Deployables.CompProps_CompSpawnCover">
+				<coverThingDef>Turret_Wombat</coverThingDef>
+				<spawnOffset>1</spawnOffset>
+				<doFlip>false</doFlip>
+				<ammoCountRange>
+					<min>1</min>
+					<max>1</max>
+				</ammoCountRange>
+				<randomizeAmmo>true</randomizeAmmo>
+			</li>
+		</comps>
+	</ThingDef>
+
+
+
+</Defs>
+

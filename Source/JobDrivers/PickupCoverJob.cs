@@ -33,7 +33,7 @@ namespace Deployables
             toil.AddFinishAction(() =>
             {
             if (pawn != null && !pawn.Dead && !pawn.Downed && !Cover.DestroyedOrNull())
-                PickupCoverUtils.PickupCover(pawn);
+                PickupCoverUtils.PickupCover(pawn, Cover);
             });
             yield return toil;
         }

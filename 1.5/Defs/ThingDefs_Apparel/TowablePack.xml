@@ -1,65 +1,53 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <Defs>	
 
-<ThingDef ParentName="Deployable_Pack" MayRequire="skyarkhangel.HSK">
-  <defName>Deployable_BallistaPack</defName>
-  <label>ballista pack</label>
-  <description>Foldable medieval ballista that can be deployed and manned in combat.</description>
-	<stuffCategories>
-		<li>Woody</li>
-	</stuffCategories>
-	<techLevel>Neolithic</techLevel>
-  <comps>
-	  <li Class="Deployables.CompProps_CompSpawnCover">
-		<coverThingDef>MedievalTimes_Ballista</coverThingDef>
-		<spawnOffset>1</spawnOffset>
-		<destroyParentOnUse>false</destroyParentOnUse>
-		<ownerTag>true</ownerTag>
-		<doFlip>false</doFlip>
-		<ammoCountRange>
-			<min>8</min>
-			<max>10</max>
-		</ammoCountRange>
-		<randomizeAmmo>true</randomizeAmmo>
-	  </li>
-  </comps>
-</ThingDef>
-
 	<ThingDef ParentName="Deployable_Pack" MayRequire="skyarkhangel.HSK">
-		<defName>Deployable_CannonPack</defName>
-		<label>Cannon pack</label>
-		<description>Foldable medieval Cannon that can be deployed and manned in combat.</description>
+	  <defName>Deployable_BallistaPack</defName>
+	  <label>ballista pack</label>
+	  <description>Foldable medieval ballista that can be deployed and manned in combat.</description>
 		<stuffCategories>
-			<li>StrongMetallic</li>
+			<li>Woody</li>
 		</stuffCategories>
-		<techLevel>Medieval</techLevel>
-		<comps>
-			<li Class="Deployables.CompProps_CompSpawnCover">
-				<coverThingDef>Turret_3inOrdinanceRifle</coverThingDef>
-				<spawnOffset>1</spawnOffset>
-				<destroyParentOnUse>false</destroyParentOnUse>
-				<ownerTag>true</ownerTag>
-				<doFlip>false</doFlip>
-				<!--<ammoDef>Ammo_3inCannon_Shell</ammoDef>-->
-				<randomizeAmmo>true</randomizeAmmo>
-			</li>
-		</comps>
+		<techLevel>Neolithic</techLevel>
+	  <comps>
+		  <li Class="Deployables.CompProps_CompSpawnCover">
+			  <coverThingList>
+				  <li>
+					  <thingDef>MedievalTimes_Ballista</thingDef>
+				  </li>
+			  </coverThingList>
+			<spawnOffset>1</spawnOffset>
+			<doFlip>false</doFlip>
+			<ammoCountRange>
+				<min>8</min>
+				<max>10</max>
+			</ammoCountRange>
+			<randomizeAmmo>true</randomizeAmmo>
+		  </li>
+	  </comps>
 	</ThingDef>
 
 	<ThingDef ParentName="Deployable_Pack" MayRequire="skyarkhangel.HSK">
-		<defName>Deployable_GatlingPack</defName>
-		<label>Gatling pack</label>
-		<description>Foldable medieval Gatling that can be deployed and manned in combat.</description>
+		<defName>Deployable_MachinegunPack</defName>
+		<label>Machinegun pack</label>
+		<description>Foldable Hi Tech machinegun that can be deployed and manned in combat.</description>
 		<stuffCategories>
 			<li>StrongMetallic</li>
 		</stuffCategories>
-		<techLevel>Industrial</techLevel>
+		<techLevel>Spacer</techLevel>
 		<comps>
 			<li Class="Deployables.CompProps_CompSpawnCover">
-				<coverThingDef>Turret_Gatling</coverThingDef>
+				<coverThingList>
+					<li>
+						<thingDef>Turret_M2Browning</thingDef>
+					</li>
+					<li>
+						<thingDef>Turret_Minigun</thingDef>
+						<weight>3</weight>
+					</li>
+				</coverThingList>
+				<drawOffset>0.5</drawOffset>
 				<spawnOffset>1</spawnOffset>
-				<destroyParentOnUse>false</destroyParentOnUse>
-				<ownerTag>true</ownerTag>
 				<doFlip>false</doFlip>
 				<ammoCountRange>
 					<min>100</min>
@@ -71,43 +59,85 @@
 	</ThingDef>
 
 	<ThingDef ParentName="Deployable_Pack" MayRequire="skyarkhangel.HSK">
-		<defName>Deployable_TOWLauncher</defName>
-		<label>TOWLauncher pack</label>
-		<description>Foldable industrial TOWLauncher that can be deployed and manned in combat.</description>
+		<defName>Deployable_GrenadeLauncherPack</defName>
+		<label>Grenade Launcher pack</label>
+		<description>Foldable Hi Tech grenade launcher that can be deployed and manned in combat.</description>
 		<stuffCategories>
 			<li>StrongMetallic</li>
 		</stuffCategories>
 		<techLevel>Spacer</techLevel>
 		<comps>
 			<li Class="Deployables.CompProps_CompSpawnCover">
-				<coverThingDef>Turret_TOWLauncher</coverThingDef>
+				<coverThingList>
+					<li>
+						<thingDef>Turret_AGLGrenadeLauncher</thingDef>
+					</li>
+					<li>
+						<thingDef>Turret_AGSThirty</thingDef>
+					</li>
+				</coverThingList>
+				<drawOffset>0.5</drawOffset>
 				<spawnOffset>1</spawnOffset>
-				<destroyParentOnUse>false</destroyParentOnUse>
-				<ownerTag>true</ownerTag>
 				<doFlip>false</doFlip>
+				<ammoCountRange>
+					<min>30</min>
+					<max>50</max>
+				</ammoCountRange>
 				<randomizeAmmo>true</randomizeAmmo>
 			</li>
 		</comps>
 	</ThingDef>
 
 	<ThingDef ParentName="Deployable_Pack" MayRequire="skyarkhangel.HSK">
-		<defName>Deployable_Javelin</defName>
-		<label>Javelin pack</label>
-		<description>Foldable medieval Javelin that can be deployed and manned in combat.</description>
+		<defName>Deployable_HeavyCannonPack</defName>
+		<label>Heavy Cannon pack</label>
+		<description>Foldable Hi Tech heavy cannon that can be deployed and manned in combat.</description>
 		<stuffCategories>
 			<li>StrongMetallic</li>
 		</stuffCategories>
 		<techLevel>Spacer</techLevel>
 		<comps>
 			<li Class="Deployables.CompProps_CompSpawnCover">
-				<coverThingDef>LightMissileSystem</coverThingDef>
+				<coverThingList>
+					<li>
+						<thingDef>Turret_Flak</thingDef>
+						<weight>3</weight>
+					</li>
+					<li>
+						<thingDef>Turret_Cannon</thingDef>
+					</li>
+				</coverThingList>
+				<drawOffset>0.5</drawOffset>
 				<spawnOffset>1</spawnOffset>
-				<destroyParentOnUse>false</destroyParentOnUse>
-				<ownerTag>true</ownerTag>
 				<doFlip>false</doFlip>
+				<ammoCountRange>
+					<min>3</min>
+					<max>5</max>
+				</ammoCountRange>
 				<randomizeAmmo>true</randomizeAmmo>
 			</li>
 		</comps>
 	</ThingDef>
 
+	<ThingDef ParentName="Deployable_Pack" MayRequire="skyarkhangel.HSK">
+		<defName>Deployable_MissileLauncher</defName>
+		<label>Missile Launcher pack</label>
+		<description>Foldable Hi Tech Missile Launcher that can be deployed and manned in combat.</description>
+		<stuffCategories>
+			<li>StrongMetallic</li>
+		</stuffCategories>
+		<techLevel>Spacer</techLevel>
+		<comps>
+			<li Class="Deployables.CompProps_CompSpawnCover">
+				<coverThingList>
+					<li><thingDef>Turret_TOWLauncher</thingDef></li>
+					<li><thingDef>LightMissileSystem</thingDef></li>
+				</coverThingList>
+				<drawOffset>0.5</drawOffset>
+				<spawnOffset>1</spawnOffset>
+				<doFlip>false</doFlip>
+				<randomizeAmmo>true</randomizeAmmo>
+			</li>
+		</comps>
+	</ThingDef>
 </Defs>

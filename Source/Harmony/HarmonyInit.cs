@@ -29,7 +29,6 @@ namespace Deployables
                 var postfix = AccessTools.Method(typeof(Patch_Verb_TryStartCastOn), nameof(Patch_Verb_TryStartCastOn.Postfix));
                 harmony.Patch(original, postfix: new HarmonyMethod(postfix));
             }
-
             harmony.PatchAll();
         }
     }

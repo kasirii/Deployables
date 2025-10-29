@@ -18,16 +18,14 @@
 		<ArmorRating_Blunt>0</ArmorRating_Blunt>
 		<ArmorRating_Heat>0</ArmorRating_Heat>
 	</statBases>
-
+	<tickerType>Normal</tickerType>
 	<smeltable>false</smeltable>
 	<destroyOnDrop>true</destroyOnDrop>
+	<tradeability>None</tradeability>
 	<graphicData>
 		<texPath>Things/Apparel/OneTimeCoverDevice/OneTimeCoverDevice</texPath>
 		<graphicClass>Graphic_Single</graphicClass>
 	</graphicData>
-  <comps>
-	  <li Class="Deployables.CompProps_CompUseWhenCast" />
-  </comps>
 
 	<equippedStatOffsets>
 		<MoveSpeed>-1</MoveSpeed>

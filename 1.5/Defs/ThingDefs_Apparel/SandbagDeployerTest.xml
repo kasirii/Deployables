@@ -21,10 +21,10 @@
 	</statBases>
 
 	<smeltable>false</smeltable>
-	<destroyOnDrop>false</destroyOnDrop>
+	<destroyOnDrop>true</destroyOnDrop>
+	<tradeability>None</tradeability>
 	
   <comps>
-	  <li Class="Deployables.CompProps_CompUseWhenCast" />
 	  <li Class="Deployables.CompProps_CompSpawnCover">
         <coverThingDef>Sandbags</coverThingDef>
       </li>
@@ -32,7 +32,6 @@
 	
   <apparel>
     <wornGraphicPath>Things/Apparel/BeltWithSandbags/Belt</wornGraphicPath>
-	  
     <countsAsClothingForNudity>false</countsAsClothingForNudity>
     <careIfWornByCorpse>false</careIfWornByCorpse>
     <careIfDamaged>false</careIfDamaged>

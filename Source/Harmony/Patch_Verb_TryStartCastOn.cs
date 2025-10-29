@@ -18,29 +18,19 @@ namespace Deployables
         {
             try
             {
-                if (__instance is Verb_Shoot || __instance is CombatExtended.Verb_ShootCE)
+                if (!__instance.verbProps.IsMeleeAttack && (__instance is Verb_Shoot || __instance is CombatExtended.Verb_ShootCE))
                 {
                     var pawn = __instance.CasterPawn;
                     if (pawn == null || !__instance.CasterIsPawn) return;
+                    var apparel = pawn?.apparel?.WornApparel?.FirstOrDefault(a => a.AllComps.OfType<CompSpawnCover>().Any());
+                    if (apparel == null) return;
+                    var coverComp = apparel.AllComps.OfType<CompSpawnCover>().FirstOrDefault();
+                    if (coverComp == null || !coverComp.cover.DestroyedOrNull()) return;
 
-                    var equipment = pawn.equipment;
-                    if (equipment == null) return;
-
-                    var weaponDef = equipment.Primary?.def;
-                    if (weaponDef == null || !weaponDef.IsRangedWeapon) return;
-
-                    var wornApparel = pawn.apparel?.WornApparel;
-                    if (wornApparel == null) return;
-
-                    foreach (var comp in wornApparel
-                                .SelectMany(a => a.AllComps)
-                                .OfType<CompUseWhenCast>())
-                    {
-                        comp.OnUse(pawn);
-                    }
+                    coverComp.DoEffect(pawn, castTarg);
                 }
             }
-            catch (System.Exception) {}
+            catch (System.Exception) { }
         }
     }
 }

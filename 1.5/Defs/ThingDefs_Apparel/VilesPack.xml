@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+	<ThingDef ParentName="Deployable_Pack" MayRequire="ViTech.MedievalOverhaul">
+		<defName>Deployable_CannonPack</defName>
+		<label>Cannon pack</label>
+		<description>Foldable medieval Cannon that can be deployed and manned in combat.</description>
+		<stuffCategories>
+			<li>StrongMetallic</li>
+		</stuffCategories>
+		<techLevel>Medieval</techLevel>
+		<comps>
+			<li Class="Deployables.CompProps_CompSpawnCover">
+				<coverThingList>
+					<li>
+						<thingDef>Turret_Culverin</thingDef>
+						<weight>3</weight>
+					</li>
+					<li>
+						<thingDef>Turret_3inOrdinanceRifle</thingDef>
+					</li>
+				</coverThingList>
+				<spawnOffset>1</spawnOffset>
+				<doFlip>false</doFlip>
+				<randomizeAmmo>true</randomizeAmmo>
+			</li>
+		</comps>
+	</ThingDef>
+
+	<ThingDef ParentName="Deployable_Pack" MayRequire="ViTech.MedievalOverhaul">
+		<defName>Deployable_GatlingPack</defName>
+		<label>Gatling pack</label>
+		<description>Foldable medieval Gatling that can be deployed and manned in combat.</description>
+		<stuffCategories>
+			<li>StrongMetallic</li>
+		</stuffCategories>
+		<techLevel>Industrial</techLevel>
+		<comps>
+			<li Class="Deployables.CompProps_CompSpawnCover">
+				<coverThingDef>Turret_Gatling</coverThingDef>
+				<spawnOffset>1</spawnOffset>
+				<doFlip>false</doFlip>
+				<ammoCountRange>
+					<min>100</min>
+					<max>150</max>
+				</ammoCountRange>
+				<randomizeAmmo>true</randomizeAmmo>
+			</li>
+		</comps>
+	</ThingDef>
+	
+	
+</Defs>
+	

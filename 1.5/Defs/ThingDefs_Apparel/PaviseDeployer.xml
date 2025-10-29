@@ -29,14 +29,14 @@
 	
   <apparel>
     <wornGraphicPath>Things/Apparel/MedievalBodyArmorNew/PaviseShield/PaviseShield</wornGraphicPath>
+	  <bodyPartGroups>
+		  <li>Waist</li>
+	  </bodyPartGroups>
+	  <layers>
+		  <li>Belt</li>
+	  </layers>
     <wornGraphicData>
         <renderUtilityAsPack>true</renderUtilityAsPack>
-		<bodyPartGroups>
-			<li>Waist</li>
-		</bodyPartGroups>
-		<layers>
-			<li>Belt</li>
-		</layers>
         <north>
             <offset>(0,-0.05)</offset>
         </north>
